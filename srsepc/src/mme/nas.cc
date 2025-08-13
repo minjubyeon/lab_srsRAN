@@ -1717,23 +1717,31 @@ bool nas::pack_service_reject(srsran::byte_buffer_t* nas_buffer, uint8_t emm_cau
 
 bool nas::pack_tracking_area_update_reject(srsran::byte_buffer_t* nas_buffer, uint8_t emm_cause)
 {
+
+  // 1. TAU Reject 메시지 구조체 생성
   LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT tau_rej;
   tau_rej.t3446_present = false;
   tau_rej.t3446         = 0;
-  tau_rej.emm_cause     = emm_cause;
+  tau_rej.emm_cause     = emm_cause; // 거절 사유 코드 저장
 
+  // 2. 혼잡(CONGESTION) 사유일 경우 경고 로그 출력
   if (emm_cause == LIBLTE_MME_EMM_CAUSE_CONGESTION) {
     // Standard would want T3446 set in this case
     m_logger.error("Tracking Area Update Reject EMM Cause set to \"CONGESTION\", but back-off timer not set.");
   }
 
+  // 3. pack 함수 호출 → 구조체 → 바이트 버퍼 변환
   LIBLTE_ERROR_ENUM err = liblte_mme_pack_tracking_area_update_reject_msg(
       &tau_rej, LIBLTE_MME_SECURITY_HDR_TYPE_PLAIN_NAS, 0, (LIBLTE_BYTE_MSG_STRUCT*)nas_buffer);
+
+  // 4. 에러 체크
   if (err != LIBLTE_SUCCESS) {
     m_logger.error("Error packing Tracking Area Update Reject");
     srsran::console("Error packing Tracking Area Update Reject\n");
-    return false;
+    return false; // 실패 시 false 반환
   }
+
+  // 5. 성공 시 true 반환
   return true;
 }
 

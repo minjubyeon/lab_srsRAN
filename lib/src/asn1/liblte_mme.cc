@@ -7434,6 +7434,8 @@ liblte_mme_pack_tracking_area_update_reject_msg(LIBLTE_MME_TRACKING_AREA_UPDATE_
 
   return (err);
 }
+
+
 LIBLTE_ERROR_ENUM
 liblte_mme_unpack_tracking_area_update_reject_msg(LIBLTE_BYTE_MSG_STRUCT*                            msg,
                                                   LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT* ta_update_rej)

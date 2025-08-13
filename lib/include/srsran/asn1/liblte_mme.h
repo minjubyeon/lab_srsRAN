@@ -3174,10 +3174,12 @@ LIBLTE_ERROR_ENUM liblte_mme_unpack_tracking_area_update_complete_msg(
 // Enums
 // Structs
 typedef struct {
-  uint8 emm_cause;
-  uint8 t3446;
-  bool  t3446_present;
+  uint8 emm_cause; // TAU Reject 이유 코드 (EMM Cause)
+  uint8 t3446; // T3446 타이머 값 (백오프 시간)
+  bool  t3446_present; //// T3446 값이 포함되어 있는지 여부
 } LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT;
+
+
 // Functions
 LIBLTE_ERROR_ENUM
 liblte_mme_pack_tracking_area_update_reject_msg(LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT* ta_update_rej,
