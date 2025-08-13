@@ -26,8 +26,9 @@ if(BUILD_STATIC)
 endif(BUILD_STATIC)
 
 if(NOT Boost_FOUND)
-    message(FATAL_ERROR "Boost required to compile srsEPC")
+  message(FATAL_ERROR "Boost required to compile srsEPC")
 endif()
+
 
 ########################################################################
 # Setup the include and linker paths
