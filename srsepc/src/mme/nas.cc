@@ -1267,7 +1267,7 @@ bool nas::handle_tracking_area_update_request(srsran::byte_buffer_t* nas_rx)
     return false;
   }
   // TODO we could enable integrity protection in some cases, but UE should comply anyway
-  pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED);
+  pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
   // Send reply
   m_s1ap->send_downlink_nas_transport(
       m_ecm_ctx.enb_ue_s1ap_id, m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), m_ecm_ctx.enb_sri);
