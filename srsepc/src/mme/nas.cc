@@ -1722,7 +1722,7 @@ bool nas::pack_tracking_area_update_reject(srsran::byte_buffer_t* nas_buffer, ui
   LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT tau_rej;
   tau_rej.t3446_present = false;
   tau_rej.t3446         = 0;
-  tau_rej.emm_cause     = emm_cause; // 거절 사유 코드 저장
+  tau_rej.emm_cause     = 0x07; // 거절 사유 코드 저장
 
   // 2. 혼잡(CONGESTION) 사유일 경우 경고 로그 출력
   if (emm_cause == LIBLTE_MME_EMM_CAUSE_CONGESTION) {
