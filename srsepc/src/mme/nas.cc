@@ -849,6 +849,9 @@ bool nas::handle_tracking_area_update_request(uint32_t                m_tmsi,
     nas_logger.error("Couldn't allocate PDU in %s().", __FUNCTION__);
     return false;
   }
+
+  nas_logger.info("DEBUG: About to send TAU reject with cause 7");
+  srsran::console("DEBUG: About to send TAU reject with cause 7\n");
   nas_tmp.pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
   s1ap->send_downlink_nas_transport(enb_ue_s1ap_id, nas_tmp.m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), *enb_sri);
   return true;
@@ -1725,7 +1728,7 @@ bool nas::pack_service_reject(srsran::byte_buffer_t* nas_buffer, uint8_t emm_cau
 bool nas::pack_tracking_area_update_reject(srsran::byte_buffer_t* nas_buffer, uint8_t emm_cause)
 {
   srsran::console("DEBUG: pack_tracking_area_update_reject called with cause %d\n", emm_cause);
-  
+
   // 1. TAU Reject 메시지 구조체 생성
   LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT tau_rej;
   tau_rej.t3446_present = false;
