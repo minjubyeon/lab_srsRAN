@@ -1254,6 +1254,11 @@ bool nas::handle_identity_response(srsran::byte_buffer_t* nas_rx)
 
 bool nas::handle_tracking_area_update_request(srsran::byte_buffer_t* nas_rx)
 {
+
+  srsran::console("DEBUG: Second handle_tracking_area_update_request called!\n");
+  m_logger.warning("DEBUG: Second handle_tracking_area_update_request called!");
+
+
   srsran::console("Warning: Tracking Area Update Request messages not handled yet.\n");
   m_logger.warning("Warning: Tracking Area Update Request messages not handled yet.");
 
@@ -1266,6 +1271,8 @@ bool nas::handle_tracking_area_update_request(srsran::byte_buffer_t* nas_rx)
     m_logger.error("Couldn't allocate PDU in %s().", __FUNCTION__);
     return false;
   }
+
+  srsran::console("DEBUG: About to send TAU reject with cause 7\n");
   // TODO we could enable integrity protection in some cases, but UE should comply anyway
   pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
   // Send reply
@@ -1717,7 +1724,8 @@ bool nas::pack_service_reject(srsran::byte_buffer_t* nas_buffer, uint8_t emm_cau
 
 bool nas::pack_tracking_area_update_reject(srsran::byte_buffer_t* nas_buffer, uint8_t emm_cause)
 {
-
+  srsran::console("DEBUG: pack_tracking_area_update_reject called with cause %d\n", emm_cause);
+  
   // 1. TAU Reject 메시지 구조체 생성
   LIBLTE_MME_TRACKING_AREA_UPDATE_REJECT_MSG_STRUCT tau_rej;
   tau_rej.t3446_present = false;
