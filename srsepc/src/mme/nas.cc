@@ -826,7 +826,7 @@ bool nas::handle_tracking_area_update_request(uint32_t                m_tmsi,
 
   nas_logger.info("Tracking Area Update Request -- S-TMSI 0x%x", m_tmsi);
   srsran::console("Tracking Area Update Request -- S-TMSI 0x%x\n", m_tmsi);
-
+  
   nas_logger.info("Tracking Area Update Request -- eNB UE S1AP Id %d", enb_ue_s1ap_id);
   srsran::console("Tracking Area Update Request -- eNB UE S1AP Id %d\n", enb_ue_s1ap_id);
 
@@ -838,7 +838,9 @@ bool nas::handle_tracking_area_update_request(uint32_t                m_tmsi,
   hss_interface_nas*  hss  = itf.hss;
   gtpc_interface_nas* gtpc = itf.gtpc;
 
-  // Context (we're just building a temp NAS to send the reject)
+  // TODO don't search for NAS ctxt, just send that reject
+  // with context we could enable integrity protection
+
   nas nas_tmp(args, itf);
   nas_tmp.m_ecm_ctx.enb_ue_s1ap_id = enb_ue_s1ap_id;
   nas_tmp.m_ecm_ctx.mme_ue_s1ap_id = s1ap->get_next_mme_ue_s1ap_id();
@@ -849,65 +851,10 @@ bool nas::handle_tracking_area_update_request(uint32_t                m_tmsi,
     return false;
   }
 
-  // ===== ① pack 호출 직전: 실제 넘길 cause 값 확인 =====
-  uint8_t cause = (uint8_t)LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED; // 기대값: 7
-  srsran::console("CALL pack TAU reject with cause=%u\n", (unsigned)cause);
-  nas_logger.warning("CALL pack TAU reject with cause=%u", (unsigned)cause);
-
-  // (테스트용) 진짜 0x07을 강제해서 보내보고 싶으면 잠시 아래 라인을 사용
-  // cause = 0x07;
-
-  nas_logger.info("DEBUG: About to send TAU reject with cause %u", (unsigned)cause);
-  srsran::console("DEBUG: About to send TAU reject with cause %u\n", (unsigned)cause);
-
-  // ===== pack 호출 =====
-  if (!nas_tmp.pack_tracking_area_update_reject(nas_tx.get(), cause)) {
-    nas_logger.error("pack_tracking_area_update_reject() failed.");
-    srsran::console("pack_tracking_area_update_reject() failed.\n");
-    return false;
-  }
-
-  // ===== ② pack 직후: NAS 버퍼 헥사 덤프 =====
-{
-    auto* p = nas_tx.get();
-    char hex_buf[1024]; // 버퍼 크기는 필요에 맞게 조정
-    char* ptr = hex_buf;
-    for (uint32_t i = 0; i < p->N_bytes; i++) {
-        ptr += sprintf(ptr, "%02X ", p->msg[i]);
-    }
-    *ptr = '\0'; // 문자열 끝
-
-    srsran::console("TX after pack: len=%u HEX=%s\n", p->N_bytes, hex_buf);
-    nas_logger.warning("TX after pack: len=%u HEX=%s", p->N_bytes, hex_buf);
-}
-
-
-
-  // (옵션) TAU REJECT(0x4E) 타입 위치에서 cause 바이트를 직접 확인/보정하고 싶다면:
-  // {
-  //   auto* p = nas_tx.get();
-  //   for (uint32_t i = 0; i + 1 < p->N_bytes; ++i) {
-  //     if (p->msg[i] == 0x4E) { // TAU REJECT Message Type
-  //       srsran::console("Found TAU REJECT MT at %u, cause=0x%02X\n", i, p->msg[i+1]);
-  //       nas_logger.warning("Found TAU REJECT MT at %u, cause=0x%02X", i, p->msg[i+1]);
-  //       // 강제 보정 테스트:
-  //       // p->msg[i+1] = 0x07;
-  //       break;
-  //     }
-  //   }
-  // }
-
-  // ===== ③ 전송 직전: 다시 한 번 덤프 =====
-  {
-    auto* p = nas_tx.get();
-    std::string hex_before_send = srsran::hex_string(p->msg, p->N_bytes);
-    srsran::console("TX before send: len=%u HEX=%s\n", p->N_bytes, hex_before_send.c_str());
-    nas_logger.warning("TX before send: len=%u HEX=%s", p->N_bytes, hex_before_send.c_str());
-  }
-
-  // ===== 전송 =====
+  nas_logger.info("DEBUG: About to send TAU reject with cause 7");
+  srsran::console("DEBUG: About to send TAU reject with cause 7\n");
+  nas_tmp.pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
   s1ap->send_downlink_nas_transport(enb_ue_s1ap_id, nas_tmp.m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), *enb_sri);
-
   return true;
 }
 
