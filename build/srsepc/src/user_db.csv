@@ -17,4 +17,4 @@
 #           With a valid IPv4 (e.g. '172.16.0.2') the UE will have a statically assigned IP.
 #                                                                                           
 # Note: Lines starting by '#' are ignored and will be overwritten                           
-ue1,mil,901550000123510,524560e1400029f034b9e45a61c8c73e,opc,2f8a86d1cb1c9ecebdf4507011b6b573,8000,1234000003bc,7,dynamic
+ue1,mil,901550000123510,524560e1400029f034b9e45a61c8c73e,opc,2f8a86d1cb1c9ecebdf4507011b6b573,8000,1234000003fe,7,dynamic
