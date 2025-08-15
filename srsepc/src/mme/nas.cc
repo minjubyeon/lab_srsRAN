@@ -614,7 +614,7 @@ bool nas::handle_service_request(uint32_t                m_tmsi,
       nas_logger.error("Couldn't allocate PDU in %s().", __FUNCTION__);
       return false;
     }
-    nas_tmp.pack_service_reject(nas_tx.get(),LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
+    nas_tmp.pack_service_reject(nas_tx.get(),LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED);
     s1ap->send_downlink_nas_transport(enb_ue_s1ap_id, nas_tmp.m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), *enb_sri);
     return true;
   }
@@ -632,7 +632,7 @@ bool nas::handle_service_request(uint32_t                m_tmsi,
       nas_logger.error("Couldn't allocate PDU in %s().", __FUNCTION__);
       return false;
     }
-    nas_tmp.pack_service_reject(nas_tx.get(),LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED );
+    nas_tmp.pack_service_reject(nas_tx.get(),LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED );
     s1ap->send_downlink_nas_transport(enb_ue_s1ap_id, nas_tmp.m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), *enb_sri);
     return true;
   }
@@ -823,6 +823,9 @@ bool nas::handle_tracking_area_update_request(uint32_t                m_tmsi,
                                               const nas_if_t&         itf)
 {
   auto& nas_logger = srslog::fetch_basic_logger("NAS");
+  
+  srsran::console("DEBUG: LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED = %d\n", LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED);
+
 
   nas_logger.info("Tracking Area Update Request -- S-TMSI 0x%x", m_tmsi);
   srsran::console("Tracking Area Update Request -- S-TMSI 0x%x\n", m_tmsi);
@@ -853,7 +856,7 @@ bool nas::handle_tracking_area_update_request(uint32_t                m_tmsi,
 
   nas_logger.info("DEBUG: About to send TAU reject with cause 7");
   srsran::console("DEBUG: About to send TAU reject with cause 7\n");
-  nas_tmp.pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
+  nas_tmp.pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED);
   s1ap->send_downlink_nas_transport(enb_ue_s1ap_id, nas_tmp.m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), *enb_sri);
   return true;
 }
@@ -1276,12 +1279,11 @@ bool nas::handle_tracking_area_update_request(srsran::byte_buffer_t* nas_rx)
     return false;
   }
   
-
   srsran::console("DEBUG: About to send TAU reject with cause 7\n");
   m_logger.info("DEBUG: About to send TAU reject with cause 7");
 
   // TODO we could enable integrity protection in some cases, but UE should comply anyway
-  pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_EPS_SERVICES_NOT_ALLOWED);
+  pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED);
   // Send reply
   m_s1ap->send_downlink_nas_transport(
       m_ecm_ctx.enb_ue_s1ap_id, m_ecm_ctx.mme_ue_s1ap_id, nas_tx.get(), m_ecm_ctx.enb_sri);
