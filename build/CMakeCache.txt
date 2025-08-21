@@ -596,10 +596,10 @@ USE_LTE_RATES:BOOL=OFF
 USE_MKL:BOOL=OFF
 
 //Path to a file.
-ZEROMQ_INCLUDE_DIRS:PATH=ZEROMQ_INCLUDE_DIRS-NOTFOUND
+ZEROMQ_INCLUDE_DIRS:PATH=/usr/include
 
 //Path to a library.
-ZEROMQ_LIBRARIES:FILEPATH=ZEROMQ_LIBRARIES-NOTFOUND
+ZEROMQ_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libzmq.so
 
 //Dependencies for the target
 asn1_utils_LIB_DEPENDS:STATIC=general;srsran_common;
@@ -665,7 +665,7 @@ srsgnb_rrc_LIB_DEPENDS:STATIC=general;srsgnb_rrc_config_utils;
 srsgnb_rrc_config_utils_LIB_DEPENDS:STATIC=general;srsran_phy;
 
 //Dependencies for the target
-srsran_common_LIB_DEPENDS:STATIC=general;srsran_phy;general;support;general;srslog;general;/usr/lib/x86_64-linux-gnu/libmbedcrypto.so;general;/usr/lib/x86_64-linux-gnu/libsctp.so;
+srsran_common_LIB_DEPENDS:STATIC=general;srsran_phy;general;support;general;srslog;general;/usr/lib/x86_64-linux-gnu/libmbedcrypto.so;
 
 //Dependencies for the target
 srsran_gtpu_LIB_DEPENDS:STATIC=general;srsran_common;general;srsran_asn1;
@@ -690,6 +690,9 @@ srsran_rf_uhd_LIB_DEPENDS:STATIC=general;srsran_rf_utils;general;srsran_phy;gene
 
 //Dependencies for the target
 srsran_rf_utils_LIB_DEPENDS:STATIC=general;srsran_phy;
+
+//Dependencies for the target
+srsran_rf_zmq_LIB_DEPENDS:STATIC=general;srsran_rf_utils;general;srsran_phy;general;/usr/lib/x86_64-linux-gnu/libzmq.so;
 
 //Dependencies for the target
 srsran_rlc_LIB_DEPENDS:STATIC=general;srsran_common;
@@ -1289,7 +1292,7 @@ UHD_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: UHD_LIBRARIES
 UHD_LIBRARIES-ADVANCED:INTERNAL=1
 //libZEROMQ found
-ZEROMQ_FOUND:INTERNAL=FALSE
+ZEROMQ_FOUND:INTERNAL=TRUE
 //ADVANCED property for variable: ZEROMQ_INCLUDE_DIRS
 ZEROMQ_INCLUDE_DIRS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZEROMQ_LIBRARIES

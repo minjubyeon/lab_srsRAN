@@ -1908,6 +1908,19 @@ srsran_rf_uhd/fast:
 .PHONY : srsran_rf_uhd/fast
 
 #=============================================================================
+# Target rules for targets named srsran_rf_zmq
+
+# Build rule for target.
+srsran_rf_zmq: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 srsran_rf_zmq
+.PHONY : srsran_rf_zmq
+
+# fast build rule for target.
+srsran_rf_zmq/fast:
+	$(MAKE) $(MAKESILENT) -f lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir/build
+.PHONY : srsran_rf_zmq/fast
+
+#=============================================================================
 # Target rules for targets named srsran_rf_object
 
 # Build rule for target.
@@ -1932,6 +1945,19 @@ srsran_rf: cmake_check_build_system
 srsran_rf/fast:
 	$(MAKE) $(MAKESILENT) -f lib/src/phy/rf/CMakeFiles/srsran_rf.dir/build.make lib/src/phy/rf/CMakeFiles/srsran_rf.dir/build
 .PHONY : srsran_rf/fast
+
+#=============================================================================
+# Target rules for targets named rf_zmq_test
+
+# Build rule for target.
+rf_zmq_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rf_zmq_test
+.PHONY : rf_zmq_test
+
+# fast build rule for target.
+rf_zmq_test/fast:
+	$(MAKE) $(MAKESILENT) -f lib/src/phy/rf/CMakeFiles/rf_zmq_test.dir/build.make lib/src/phy/rf/CMakeFiles/rf_zmq_test.dir/build
+.PHONY : rf_zmq_test/fast
 
 #=============================================================================
 # Target rules for targets named rf_file_test
@@ -2829,6 +2855,19 @@ npdsch_ue: cmake_check_build_system
 npdsch_ue/fast:
 	$(MAKE) $(MAKESILENT) -f lib/examples/CMakeFiles/npdsch_ue.dir/build.make lib/examples/CMakeFiles/npdsch_ue.dir/build
 .PHONY : npdsch_ue/fast
+
+#=============================================================================
+# Target rules for targets named zmq_remote_rx
+
+# Build rule for target.
+zmq_remote_rx: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 zmq_remote_rx
+.PHONY : zmq_remote_rx
+
+# fast build rule for target.
+zmq_remote_rx/fast:
+	$(MAKE) $(MAKESILENT) -f lib/examples/CMakeFiles/zmq_remote_rx.dir/build.make lib/examples/CMakeFiles/zmq_remote_rx.dir/build
+.PHONY : zmq_remote_rx/fast
 
 #=============================================================================
 # Target rules for targets named cell_search
@@ -5375,6 +5414,7 @@ help:
 	@echo "... resample_arb_test"
 	@echo "... resampler_test"
 	@echo "... rf_file_test"
+	@echo "... rf_zmq_test"
 	@echo "... ric_e2"
 	@echo "... ringbuffer_test"
 	@echo "... rlc_am_control_test"
@@ -5493,6 +5533,7 @@ help:
 	@echo "... srsran_rf_object"
 	@echo "... srsran_rf_uhd"
 	@echo "... srsran_rf_utils"
+	@echo "... srsran_rf_zmq"
 	@echo "... srsran_rlc"
 	@echo "... srsran_scrambling"
 	@echo "... srsran_sync"
@@ -5554,6 +5595,7 @@ help:
 	@echo "... usrp_txrx"
 	@echo "... vector_test"
 	@echo "... viterbi_test"
+	@echo "... zmq_remote_rx"
 .PHONY : help
 
 

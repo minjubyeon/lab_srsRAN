@@ -105,7 +105,6 @@ srsue/src/stack/upper/test/pcsc_usim_test: /usr/lib/x86_64-linux-gnu/libfftw3f.s
 srsue/src/stack/upper/test/pcsc_usim_test: lib/src/srslog/libsrslog.a
 srsue/src/stack/upper/test/pcsc_usim_test: lib/src/support/libsupport.a
 srsue/src/stack/upper/test/pcsc_usim_test: /usr/lib/x86_64-linux-gnu/libmbedcrypto.so
-srsue/src/stack/upper/test/pcsc_usim_test: /usr/lib/x86_64-linux-gnu/libsctp.so
 srsue/src/stack/upper/test/pcsc_usim_test: /usr/lib/x86_64-linux-gnu/libpcsclite.so
 srsue/src/stack/upper/test/pcsc_usim_test: srsue/src/stack/upper/test/CMakeFiles/pcsc_usim_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/minjubyeon/srsRAN_4G/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable pcsc_usim_test"

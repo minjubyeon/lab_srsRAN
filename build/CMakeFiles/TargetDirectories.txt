@@ -400,8 +400,10 @@
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/phch/test/CMakeFiles/install/strip.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/srsran_rf_utils.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/srsran_rf_uhd.dir
+/home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/srsran_rf_zmq.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/srsran_rf_object.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/srsran_rf.dir
+/home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/rf_zmq_test.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/rf_file_test.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/package.dir
 /home/minjubyeon/srsRAN_4G/build/lib/src/phy/rf/CMakeFiles/package_source.dir
@@ -759,6 +761,7 @@
 /home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/pdsch_enodeb.dir
 /home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/npdsch_enodeb.dir
 /home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/npdsch_ue.dir
+/home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/zmq_remote_rx.dir
 /home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/cell_search.dir
 /home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/usrp_capture.dir
 /home/minjubyeon/srsRAN_4G/build/lib/examples/CMakeFiles/usrp_capture_sync.dir
