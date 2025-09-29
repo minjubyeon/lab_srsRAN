@@ -69,7 +69,7 @@ void nas::reset()
   m_sec_ctx.cipher_algo                           = cipher_algo;
 }
 
-/**********************************
+/*********************************
  *
  * Handle UE Initiating Messages
  *
