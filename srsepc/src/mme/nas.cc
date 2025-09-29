@@ -1278,9 +1278,6 @@ bool nas::handle_tracking_area_update_request(srsran::byte_buffer_t* nas_rx)
     m_logger.error("Couldn't allocate PDU in %s().", __FUNCTION__);
     return false;
   }
-  
-  srsran::console("DEBUG: About to send TAU reject with cause 7\n");
-  m_logger.info("DEBUG: About to send TAU reject with cause 7");
 
   // TODO we could enable integrity protection in some cases, but UE should comply anyway
   pack_tracking_area_update_reject(nas_tx.get(), LIBLTE_MME_EMM_CAUSE_IMPLICITLY_DETACHED);
